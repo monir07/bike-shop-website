@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Table, Button, Badge } from 'react-bootstrap';
 
 const AllOrder = () => {
-    const [allOrder, setAllOrder] = useState([])
+    const [allOrder, setAllOrder] = useState([]);
+    const [refreshKey, setRefreshKey] = useState(0);
+
     useEffect(() => {
         fetch('https://fathomless-falls-34932.herokuapp.com/all-orders')
             .then(res => res.json())
             .then(data => setAllOrder(data));
-    }, [])
+    }, [refreshKey])
 
     const handleDeleteOrder = id => {
         const proceed = window.confirm('Are you sure, you want to delete?');
@@ -27,7 +29,24 @@ const AllOrder = () => {
 
         }
     }
-
+    const handleUpdateOrder = id => {
+        const url = `http://localhost:5000/order/${id}`;
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    alert('Update Successful');
+                    setRefreshKey(oldKey => oldKey + 1)
+                    // const remainingOrders = allOrder.filter(order => order._id === '');
+                    // setAllOrder(remainingOrders);
+                }
+            })
+    }
     return (
         <div className="container">
             <Table responsive>
@@ -51,10 +70,18 @@ const AllOrder = () => {
                                 <td>{order.email}</td>
                                 <td>{order.address}</td>
                                 <td>{order.phoneNo}</td>
-                                <td><Badge bg="warning" text="dark">Pending</Badge></td>
+                                <td>
+                                    {order.isApproved ?
+                                        <Badge bg="success" text="dark">approved</Badge> :
+                                        <Badge bg="warning" text="dark">pending</Badge>
+                                    }
+                                </td>
                                 <td>
                                     <Button onClick={() => handleDeleteOrder(order._id)} variant="danger" className="mx-2"> Delete </Button>
-                                    <Button variant="success"> Approve </Button>
+                                    {order.isApproved ?
+                                        null :
+                                        <Button onClick={() => handleUpdateOrder(order._id)} variant="success"> Approve </Button>
+                                    }
                                 </td>
                             </tr>
                         ))

@@ -30,7 +30,7 @@ const AllOrder = () => {
         }
     }
     const handleUpdateOrder = id => {
-        const url = `http://localhost:5000/order/${id}`;
+        const url = `https://fathomless-falls-34932.herokuapp.com/order/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

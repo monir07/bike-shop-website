@@ -1,0 +1,14 @@
+.nav-link a:hover{
+    background-color: skyblue;
+    border-radius: 5px;
+
+
+}
+
+.nav-link a{
+    color: white;
+}
+
+.nav-bg{
+    background-color: #274979;
+}

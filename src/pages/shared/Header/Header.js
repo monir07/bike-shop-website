@@ -11,8 +11,8 @@ const Header = () => {
         <>
             <Navbar className="nav-bg" sticky="top" collapseOnSelect expand="lg">
                 <Container>
-                    <Navbar.Brand as={Link} to="/home">
-                        <img style={{ width: "70%" }} src={siteLogo} className="image-fluid" alt='logo'></img>
+                    <Navbar.Brand as={Link} to="/home" className="text-white fw-bold">
+                        <img style={{ width: "35%" }} src={siteLogo} className="image-fluid" alt='logo' />{' '} Tourism-Site
                     </Navbar.Brand>
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end nav-link">

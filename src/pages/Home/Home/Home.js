@@ -6,22 +6,22 @@ import TeamMember from '../TeamMember/TeamMember';
 import HappyClient from '../HappyClient/HappyClient';
 
 const Home = () => {
-    const [services, setServices] = useState([])
+    const [product, setProduct] = useState([])
     useEffect(() => {
-        fetch('https://fathomless-falls-34932.herokuapp.com/packages')
+        fetch('http://localhost:5000/products')
             .then(res => res.json())
-            .then(data => setServices(data.packages));
+            .then(data => setProduct(data.products));
     }, [])
     return (
         <div id="home">
             <Banner></Banner>
             <div className="container">
-                <h2 className="text-dark display-2 text-center my-5">Our Packages</h2>
+                <h2 className="text-dark display-2 text-center my-5 text-uppercase">Our Products</h2>
                 <Row xs={1} md={3} className="g-4">
                     {
-                        services.map((service, index) => (
-                            index > 8
-                                ? <Service key={service.id} service={service}></Service>
+                        product.map((product, index) => (
+                            index > 2
+                                ? <Service key={product._id} products={product}></Service>
                                 : null
                         ))
                     }

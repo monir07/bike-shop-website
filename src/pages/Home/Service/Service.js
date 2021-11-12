@@ -2,27 +2,32 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Service.css';
 import { Col, Card, Button, ListGroup, Badge, ListGroupItem } from 'react-bootstrap';
-const Service = ({ service }) => {
+
+const Service = ({ products }) => {
     // const {service} = props;
-    const { _id, name, price, duration, short_des, img } = service;
+    const { _id, name, description, max_speed, price, img } = products;
     return (
         <Col>
             <Card>
                 <Card.Img variant="top" src={img} />
                 <Card.Body>
                     <Card.Title className="">{name}</Card.Title>
-                    <Card.Text className="text-secondary">{short_des.slice(0, 130)}</Card.Text>
+                    <Card.Text className="text-secondary">{description.slice(0, 130)}</Card.Text>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
-                    <ListGroupItem className="text-primary">{duration}
-                        <h4 className="d-inline m-3"><Badge bg="warning">$ {price}</Badge></h4>
+                    <ListGroupItem className="text-secondary">
+                        <h6>Top Speed: {max_speed} Kpmh</h6>
+                    </ListGroupItem>
+                    <ListGroupItem className="text-secondary">
+                        <h6>Price in USD: $ {price}</h6>
                     </ListGroupItem>
                 </ListGroup>
                 <Card.Body>
                     <Link to={{
                         pathname: "/booking/" + _id,
-                        userProps: { packageName: name, image: img, details: short_des },
+                        userProps: { packageName: name, image: img, details: description },
                     }}><Button variant="danger">Book Now</Button></Link>
+                    <Link><Button variant="warning" className="float-end">Details</Button></Link>
                 </Card.Body>
 
             </Card>

@@ -14,7 +14,7 @@ const HappyClient = () => {
     const img8 = 'https://phero-web.nyc3.cdn.digitaloceanspaces.com/website-prod-images/public/files/1608470713768.jpg';
     return (
         <div className="container">
-            <h2 className="my-5 display-3 text-center">Our Happy Clients</h2>
+            <h2 className="my-5 display-3 text-center text-uppercase">corporate partner</h2>
             <OwlCarousel className='owl-theme' loop margin={10} nav>
                 <div className='item'>
                     <div className="card align-items-center border-0">

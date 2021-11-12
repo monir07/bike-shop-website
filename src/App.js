@@ -14,6 +14,7 @@ import PrivateRoute from './pages/Login/PrivateRoute/PrivateRoute';
 import AddPackage from './pages/AddPackage/AddPackage';
 import AllOrder from './pages/AllOrder/AllOrder';
 import MyOrder from './pages/MyOrder/MyOrder';
+import Footer2 from './pages/shared/Footer2/Footer2';
 function App() {
   return (
     <div>
@@ -57,7 +58,8 @@ function App() {
               <NotFound></NotFound>
             </Route>
           </Switch>
-          <Footer></Footer>
+          {/* <Footer></Footer> */}
+          <Footer2></Footer2>
         </Router>
       </AuthProvider>
     </div>

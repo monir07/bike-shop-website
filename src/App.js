@@ -15,6 +15,7 @@ import AddPackage from './pages/AddPackage/AddPackage';
 import AllOrder from './pages/AllOrder/AllOrder';
 import MyOrder from './pages/MyOrder/MyOrder';
 import Footer2 from './pages/shared/Footer2/Footer2';
+import DashboardHome from './pages/dashboard/DashboardHome/DashboardHome';
 function App() {
   return (
     <div>
@@ -36,6 +37,9 @@ function App() {
             </PrivateRoute>
             <Route path='/contact-us'>
               <ContactUs></ContactUs>
+            </Route>
+            <Route path='/dashboard'>
+              <DashboardHome></DashboardHome>
             </Route>
 
             <PrivateRoute path='/add-package'>

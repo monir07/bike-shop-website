@@ -1,14 +1,14 @@
 .nav-link a:hover{
-    background-color: skyblue;
+    background-color: rgb(201, 85, 85);
     border-radius: 5px;
 
 
 }
 
 .nav-link a{
-    color: white;
+    color: rgb(94, 94, 94);
 }
 
 .nav-bg{
-    background-color: #274979;
+    background-color: #ffffff;
 }

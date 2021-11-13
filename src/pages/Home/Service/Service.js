@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Service.css';
-import { Col, Card, Button, ListGroup, Badge, ListGroupItem } from 'react-bootstrap';
+import { Col, Card, Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 const Service = ({ products }) => {
     // const {service} = props;

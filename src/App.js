@@ -1,27 +1,23 @@
 import './App.css';
-import Header from './pages/shared/Header/Header';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from './pages/Home/Home/Home';
-import Footer from './pages/shared/Footer/Footer';
 import ContactUs from './pages/ContactUs/ContactUs';
 import Services from './pages/Home/Services/Services';
-import Login from './pages/Login/Login/Login';
+import SignInSide from './pages/Login/Login/SignInSide';
 import NotFound from './pages/NotFound/NotFound';
 import SignUp from './pages/SignUp/SignUp';
-import Details from './pages/Details/Details';
+import Booking from './pages/Booking/Booking';
 import AuthProvider from './contexts/AuthProvider';
 import PrivateRoute from './pages/Login/PrivateRoute/PrivateRoute';
 import AddPackage from './pages/AddPackage/AddPackage';
 import AllOrder from './pages/AllOrder/AllOrder';
 import MyOrder from './pages/MyOrder/MyOrder';
-import Footer2 from './pages/shared/Footer2/Footer2';
-import DashboardHome from './pages/dashboard/DashboardHome/DashboardHome';
+import Dashboard from './pages/dashboard/dashboard2/Dashboard';
 function App() {
   return (
     <div>
       <AuthProvider>
         <Router>
-          <Header></Header>
           <Switch>
             <Route exact path='/'>
               <Home></Home>
@@ -29,18 +25,18 @@ function App() {
             <Route path='/home'>
               <Home></Home>
             </Route>
-            <PrivateRoute path='/services'>
+            <PrivateRoute path='/products'>
               <Services></Services>
             </PrivateRoute>
-            <PrivateRoute path='/booking/:detailId'>
-              <Details></Details>
+            <PrivateRoute path='/booking/:bookId'>
+              <Booking></Booking>
             </PrivateRoute>
             <Route path='/contact-us'>
               <ContactUs></ContactUs>
             </Route>
-            <Route path='/dashboard'>
-              <DashboardHome></DashboardHome>
-            </Route>
+            <PrivateRoute path='/dashboard'>
+              <Dashboard></Dashboard>
+            </PrivateRoute>
 
             <PrivateRoute path='/add-package'>
               <AddPackage></AddPackage>
@@ -53,7 +49,7 @@ function App() {
             </PrivateRoute>
 
             <Route path='/login'>
-              <Login></Login>
+              <SignInSide></SignInSide>
             </Route>
             <Route path='/sign-up'>
               <SignUp></SignUp>
@@ -62,8 +58,6 @@ function App() {
               <NotFound></NotFound>
             </Route>
           </Switch>
-          {/* <Footer></Footer> */}
-          <Footer2></Footer2>
         </Router>
       </AuthProvider>
     </div>

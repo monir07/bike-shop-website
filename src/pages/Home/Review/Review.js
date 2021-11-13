@@ -2,9 +2,9 @@ import React from 'react';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
-import './HappyClients.css'
+import './Review.css'
 
-const HappyClient = () => {
+const Review = () => {
     const img1 = 'https://www.pngitem.com/pimgs/m/4-42408_vector-art-design-men-fashion-vector-art-illustration.png';
     const img2 = 'https://phero-web.nyc3.cdn.digitaloceanspaces.com/website-prod-images/public/files/1623136169302.jpg';
     const img3 = 'https://phero-web.nyc3.cdn.digitaloceanspaces.com/website-prod-images/public/files/1613735826005.jpg';
@@ -94,4 +94,4 @@ const HappyClient = () => {
     );
 };
 
-export default HappyClient;
+export default Review;

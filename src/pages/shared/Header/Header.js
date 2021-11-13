@@ -5,7 +5,7 @@ import './Header.css';
 import useAuth from '../../../hooks/useAuth';
 
 const Header = () => {
-    const { user, logOut } = useAuth();
+    const { user, logout } = useAuth();
     const siteLogo = 'https://i.ibb.co/qFYvc8w/logo-bike.png';
     return (
         <>
@@ -18,7 +18,7 @@ const Header = () => {
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end nav-link">
                         <Nav.Link as={Link} to="/home">Home</Nav.Link>
-                        <Nav.Link as={Link} to="/services">Products</Nav.Link>
+                        <Nav.Link as={Link} to="/products">Products</Nav.Link>
                         <Nav.Link as={Link} to="/contact-us">Contact Us</Nav.Link>
                         <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                         {user.email ?
@@ -26,15 +26,7 @@ const Header = () => {
                             null
                         }
                         {user.email ?
-                            <Nav.Link as={Link} to="/all-orders">All Orders</Nav.Link> :
-                            null
-                        }
-                        {user.email ?
-                            <Nav.Link as={Link} to="/add-package">Add Package</Nav.Link> :
-                            null
-                        }
-                        {user.email ?
-                            <button onClick={logOut} className="btn btn-danger">Log Out</button> :
+                            <button onClick={logout} className="btn btn-danger">Log Out</button> :
                             <Nav.Link as={Link} to="/login">Login</Nav.Link>
                         }
                         {user.email ?

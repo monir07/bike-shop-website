@@ -1,131 +1,152 @@
-// import { getAuth, signInWithEmailAndPassword, updateProfile } from '@firebase/auth';
-import { getAuth, sendEmailVerification, updateProfile } from '@firebase/auth';
-import React, { useState } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import { Link, useHistory } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Alert, CircularProgress } from '@mui/material';
 import useAuth from '../../hooks/useAuth';
-import './SignUp.css'
-const Login = () => {
-    const { registerNewUser } = useAuth();
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const history = useHistory();
-    const location = useLocation();
 
-    const redirectUrl = location.state?.from || '/home';
-    const auth = getAuth();
-    // user name catch from user 
-    const handleNameChange = e => {
-        setName(e.target.value);
+function Copyright(props) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" to="#" style={{ textDecoration: 'none' }}>
+        Bike Point
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
+const theme = createTheme();
+
+export default function SignUp() {
+  const { user, registerUser, isLoading, authError } = useAuth();
+  const [notMatch, setNotMatch] = React.useState(false);
+  const history = useHistory();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const email = data.get('email');
+    const password = data.get('password');
+    const password2 = data.get('password2');
+    const name = data.get('fullName');
+    // eslint-disable-next-line no-console
+    if (password !== password2) {
+      // alert('Your password did not match');
+      setNotMatch(true);
+      return;
     }
+    console.log({
+      email: email,
+      password: password,
+      password2: password2,
+      name: name,
+    });
+    registerUser(email, password, name, history);
+    setNotMatch(false);
+  };
 
-    // email catch form user
-    const handleEmailChange = e => {
-        setEmail(e.target.value);
-    }
+  return (
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          {notMatch && <Alert severity="error">Password did not match</Alert>}
+          {isLoading && <CircularProgress />}
+          {user?.email && <Alert severity="success">User Created successfully!</Alert>}
+          {authError && <Alert severity="error">{authError}</Alert>}
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="fullName"
+                  label="Full Name"
+                  name="fullName"
+                  autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password2"
+                  label="Re-type Password"
+                  type="password"
 
-    // password catch from user
-    const handlePasswordChange = e => {
-        setPassword(e.target.value)
-    }
+                />
+              </Grid>
 
-    // registration function start from here
-    const handleRegistration = e => {
-        e.preventDefault();
-        if (password.length < 6) {
-            setError('Password Must be at least 6 characters long.')
-            return;
-        }
-        if (!/(?=.*[A-Z].*[A-Z])/.test(password)) {
-            setError('Password Must contain 2 upper case');
-            return;
-        }
-        registerNewUser(email, password)
-            .then(result => {
-                setError('');
-                verifyEmail();
-                setUserName();
-                history.push(redirectUrl)
-            })
-    }
+              {/* <Grid item xs={12}>
+                <FormControlLabel
+                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  label="I want to receive inspiration, marketing promotions and updates via email."
+                />
+              </Grid> */}
 
-    // update profile name
-    const setUserName = () => {
-        updateProfile(auth.currentUser, { displayName: name })
-            .then(() => {
-                // setUser(user);
-            })
-    }
-
-    // email verification
-    const verifyEmail = () => {
-        sendEmailVerification(auth.currentUser)
-            .then(() => {
-
-            })
-    }
-    const signupImg = 'https://i.ibb.co/M9cmRwn/Register-access-login-password-internet-online-website-concept-vector-flat-graphic-design-flat.jpg';
-    return (
-        <div>
-            <div className="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
-                <div className="card card0 border-0">
-                    <div className="row d-flex">
-                        <div className="col-lg-6">
-                            <div className="card1 pb-5">
-                                <div className="row px-3 justify-content-center mt-2 mb-5 border-line"> <img src={signupImg} alt="" className="img-fluid" /> </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-6">
-                            <form onSubmit={handleRegistration}>
-                                <div className="card2 card border-0 px-4 py-5">
-                                    <div className="row mb-4 px-3">
-                                        <h5 className="mb-0 mr-4 my-2">Registration</h5>
-                                    </div>
-                                    {/* User Name Input field  */}
-                                    <div className="row px-3">
-                                        <label className="mb-1">
-                                            <h6 className="mb-0 text-sm">Name</h6>
-                                        </label>
-                                        <input className="mb-4" onBlur={handleNameChange} type="text" placeholder="Enter your name" required />
-                                    </div>
-
-                                    {/* Email Input field  */}
-                                    <div className="row px-3">
-                                        <label className="mb-1">
-                                            <h6 className="mb-0 text-sm">Email Address</h6>
-                                        </label>
-                                        <input className="mb-4" onBlur={handleEmailChange} type="email" placeholder="Enter a valid email address" required />
-                                    </div>
-
-                                    {/* password input field  */}
-                                    <div className="row px-3">
-                                        <label className="mb-1">
-                                            <h6 className="mb-0 text-sm">Password</h6>
-                                            <span className="text-danger">{error}</span>
-                                        </label>
-                                        <input onBlur={handlePasswordChange} type="password" name="password" placeholder="Enter password" required />
-                                    </div>
-
-                                    {/* signup button  */}
-                                    <div className="row mb-3 px-3">
-                                        <button type="submit" className="btn btn-blue text-center">Sign Up</button>
-                                    </div>
-
-                                    {/* Login Link  */}
-                                    <div className="row mb-4 px-3">
-                                        <small className="font-weight-bold">Don't have an account? <Link to="/login"><button type="button" className="btn btn-link">Login</button></Link>
-                                        </small>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    );
-};
-
-export default Login;
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link to="/login" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        <Copyright sx={{ mt: 5 }} />
+      </Container>
+    </ThemeProvider>
+  );
+}

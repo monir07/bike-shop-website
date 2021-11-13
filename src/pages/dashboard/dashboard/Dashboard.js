@@ -12,10 +12,23 @@ import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import Chart from './Chart';
+
+import DashboardHome from '../DashboardHome/DashboardHome';
+import Pay from '../Pay/Pay';
+import MyOrder from '../MyOrder/MyOrder';
+import Review from '../Review/Review';
+import ManageAllOrder from '../ManageAllOrder/ManageAllOrder';
+import AddProduct from '../AddProduct/AddProduct';
+import ManageProduct from '../ManageProduct/ManageProduct';
+import MakeAdmin from '../MakeAdmin/MakeAdmin';
+import {
+  Switch,
+  Route,
+  Link,
+  useRouteMatch
+} from 'react-router-dom';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import ListItems from './listItems';
@@ -87,6 +100,7 @@ function DashboardContent() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  let { path, url } = useRouteMatch();
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -163,24 +177,11 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
 
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Chart />
-                </Paper>
-              </Grid>
+            {/* <Grid container spacing={3}> */}
 
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
+            {/* Recent Deposits */}
+            {/* <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
                     p: 2,
@@ -191,15 +192,50 @@ function DashboardContent() {
                 >
                   <Deposits />
                 </Paper>
-              </Grid>
+              </Grid> */}
 
-              {/* Recent Orders */}
-              <Grid item xs={12}>
+            {/* Recent Orders */}
+            {/* <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <Orders />
                 </Paper>
-              </Grid>
-            </Grid>
+              </Grid> */}
+            {/* </Grid> */}
+
+            {/* Custom Route Start from here */}
+            <Switch>
+              <Route exact path={`${path}`}>
+                <DashboardHome />
+              </Route>
+
+              <Route path={`${path}/pay`}>
+                <Pay></Pay>
+              </Route>
+
+              <Route path={`${path}/myOrders`}>
+                <MyOrder></MyOrder>
+              </Route>
+
+              <Route path={`${path}/review`}>
+                <Review></Review>
+              </Route>
+
+              <Route path={`${path}/manageOrders`}>
+                <ManageAllOrder></ManageAllOrder>
+              </Route>
+
+              <Route path={`${path}/addProduct`}>
+                <AddProduct></AddProduct>
+              </Route>
+
+              <Route path={`${path}/manageProducts`}>
+                <ManageProduct></ManageProduct>
+              </Route>
+
+              <Route path={`${path}/makeAdmin`}>
+                <MakeAdmin></MakeAdmin>
+              </Route>
+            </Switch>
 
             {/* Copyright  */}
             <Copyright sx={{ pt: 4 }} />

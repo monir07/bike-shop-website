@@ -20,11 +20,7 @@ const Header = () => {
                         <Nav.Link as={Link} to="/home">Home</Nav.Link>
                         <Nav.Link as={Link} to="/products">Products</Nav.Link>
                         <Nav.Link as={Link} to="/contact-us">Contact Us</Nav.Link>
-                        <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
-                        {user.email ?
-                            <Nav.Link as={Link} to="/my-orders">My Orders</Nav.Link> :
-                            null
-                        }
+                        <Nav.Link as={Link} to="/dashboard" className="m-2">Dashboard</Nav.Link>
                         {user.email ?
                             <button onClick={logout} className="btn btn-danger">Log Out</button> :
                             <Nav.Link as={Link} to="/login">Login</Nav.Link>

@@ -12,7 +12,7 @@ import PrivateRoute from './pages/Login/PrivateRoute/PrivateRoute';
 import AddPackage from './pages/AddPackage/AddPackage';
 import AllOrder from './pages/AllOrder/AllOrder';
 import MyOrder from './pages/MyOrder/MyOrder';
-import Dashboard from './pages/dashboard/dashboard2/Dashboard';
+import Dashboard from './pages/dashboard/dashboard/Dashboard';
 function App() {
   return (
     <div>

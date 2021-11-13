@@ -27,7 +27,6 @@ const Home = () => {
                     }
                 </Row>
             </div>
-            <TeamMember></TeamMember>
             <HappyClient></HappyClient>
         </div>
     );

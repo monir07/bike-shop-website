@@ -23,13 +23,6 @@ const Booking = (props) => {
     const [isBooked, setIsBooked] = React.useState(false);
 
     const handleBooking = event => {
-        // axios.post('https://fathomless-falls-34932.herokuapp.com/place_order', data)
-        //     .then(res => {
-        //         if (res.data.insertedId) {
-        //             alert('added successfully');
-        //             // reset();
-        //         }
-        //     })
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const bookId = data.get('bookId');
@@ -44,7 +37,6 @@ const Booking = (props) => {
             phoneNo: phoneNo,
             address: address,
         }
-        console.log(postData);
 
         axios.post('http://localhost:5000/place_order', postData)
             .then(response => {
@@ -59,12 +51,6 @@ const Booking = (props) => {
             });
 
     };
-
-    // React.useEffect(() => {
-    //     fetch(`http://localhost:5000/products/${bookId}`)
-    //         .then(res => res.json())
-    //         .then(data => setBookedItem(data))
-    // }, [])
 
     React.useEffect(() => {
         const fetchProducts = async () => {

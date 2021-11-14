@@ -2,11 +2,41 @@ import { Grid, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import Button from '@mui/material/Button';
 import React from 'react';
+import axios from 'axios';
+
 
 const AddProduct = () => {
+    const [isAdded, setIsAdded] = React.useState(false);
+
     const handleSubmit = (event) => {
         event.preventDefault();
-    };
+        const data = new FormData(event.currentTarget);
+        const productName = data.get('productName');
+        const price = data.get('price');
+        const topSpeed = data.get('topSpeed');
+        const photoUrl = data.get('photoUrl');
+        const shortDetails = data.get('shortDetails');
+        const postData = {
+            name: productName,
+            price: price,
+            max_speed: topSpeed,
+            img: photoUrl,
+            description: shortDetails
+        };
+        console.log(postData);
+        axios.post('http://localhost:5000/product', postData)
+            .then(response => {
+                if (response.data.insertedId) {
+                    setIsAdded(true);
+                    alert('Your Product is Added');
+                }
+            })
+            .catch(error => {
+                this.setState({ errorMessage: error.message });
+                console.error('There was an error!', error);
+            });
+    }
+
     return (
         <div>
             <h2>Add Product From Here</h2>

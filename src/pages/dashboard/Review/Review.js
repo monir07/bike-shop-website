@@ -2,8 +2,12 @@ import { Grid, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import Button from '@mui/material/Button';
 import React from 'react';
+import axios from 'axios';
+import useAuth from '../../../hooks/useAuth';
 
 const Review = () => {
+    const [isAdded, setIsAdded] = React.useState(false);
+    const { user } = useAuth();
     const reviewPoint = [
         {
             value: 0,
@@ -39,22 +43,32 @@ const Review = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
+        const fullName = data.get('fullName');
         const email = data.get('email');
-        const password = data.get('password');
-        const password2 = data.get('password2');
-        const name = data.get('fullName');
-        // eslint-disable-next-line no-console
-        if (password !== password2) {
-            // alert('Your password did not match');
-
-            return;
-        }
-        console.log({
+        const reviewPoint = point;
+        const photoUrl = data.get('photoUrl');
+        const reviewDetails = data.get('reviewDetails');
+        const postData = {
+            name: fullName,
             email: email,
-            password: password,
-            password2: password2,
-            name: name,
-        });
+            point: reviewPoint,
+            img: photoUrl,
+            description: reviewDetails
+        };
+        console.log(postData);
+        axios.post('http://localhost:5000/review', postData)
+            .then(response => {
+                if (response.data.insertedId) {
+                    setIsAdded(true);
+                    alert('Your Review is Submitted');
+                }
+            })
+            .catch(error => {
+                this.setState({ errorMessage: error.message });
+                console.error('There was an error!', error);
+            });
+
+
     };
     return (
         <div>
@@ -68,7 +82,7 @@ const Review = () => {
                             id="fullName"
                             label="Full Name"
                             name="fullName"
-                            autoComplete="family-name"
+                            value={user.displayName}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -78,7 +92,7 @@ const Review = () => {
                             id="email"
                             label="Email Address"
                             name="email"
-                            autoComplete="email"
+                            value={user.email}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>

@@ -7,8 +7,8 @@ const TeamMember = () => {
     const img4 = 'https://phero-web.nyc3.cdn.digitaloceanspaces.com/website-prod-images/public/files/1625573334879.png';
 
     return (
-        <div className="container">
-            <h3 className="text-center display-3 my-5">Our Team</h3>
+        <div className="container mb-5">
+            <h3 className="text-center display-5 my-5">Our Team</h3>
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <div class="col">
                     <div className="card">

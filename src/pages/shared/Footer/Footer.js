@@ -41,7 +41,6 @@ export default function Footer() {
       >
         <Container maxWidth="sm">
           <Typography variant="body1">
-            My Favorite Footer May be set up here ....
           </Typography>
           <Copyright />
         </Container>

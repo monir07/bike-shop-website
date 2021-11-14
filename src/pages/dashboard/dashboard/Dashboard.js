@@ -10,11 +10,8 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-
 import DashboardHome from '../DashboardHome/DashboardHome';
 import Pay from '../Pay/Pay';
 import MyOrder from '../MyOrder/MyOrder';
@@ -23,14 +20,13 @@ import ManageAllOrder from '../ManageAllOrder/ManageAllOrder';
 import AddProduct from '../AddProduct/AddProduct';
 import ManageProduct from '../ManageProduct/ManageProduct';
 import MakeAdmin from '../MakeAdmin/MakeAdmin';
+import AdminRoute from './../../Login/AdminRoute/AdminRoute';
 import {
   Switch,
   Route,
   Link,
   useRouteMatch
 } from 'react-router-dom';
-import Deposits from './Deposits';
-import Orders from './Orders';
 import ListItems from './listItems';
 import { CardMedia } from '@mui/material';
 
@@ -100,7 +96,7 @@ function DashboardContent() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  let { path, url } = useRouteMatch();
+  let { path } = useRouteMatch();
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -220,21 +216,22 @@ function DashboardContent() {
                 <Review></Review>
               </Route>
 
-              <Route path={`${path}/manageOrders`}>
+              {/* Admin Route Start From Here */}
+              <AdminRoute path={`${path}/manageOrders`}>
                 <ManageAllOrder></ManageAllOrder>
-              </Route>
+              </AdminRoute>
 
-              <Route path={`${path}/addProduct`}>
+              <AdminRoute path={`${path}/addProduct`}>
                 <AddProduct></AddProduct>
-              </Route>
+              </AdminRoute>
 
-              <Route path={`${path}/manageProducts`}>
+              <AdminRoute path={`${path}/manageProducts`}>
                 <ManageProduct></ManageProduct>
-              </Route>
+              </AdminRoute>
 
-              <Route path={`${path}/makeAdmin`}>
+              <AdminRoute path={`${path}/makeAdmin`}>
                 <MakeAdmin></MakeAdmin>
-              </Route>
+              </AdminRoute>
             </Switch>
 
             {/* Copyright  */}

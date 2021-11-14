@@ -1,6 +1,6 @@
 import { Grid, Paper } from '@mui/material';
 import React from 'react';
-import Orders from '../dashboard/Orders';
+import Chart from '../dashboard/Chart';
 
 const DashboardHome = () => {
     return (
@@ -8,7 +8,7 @@ const DashboardHome = () => {
             <h2>This is Dashboard Home</h2>
             <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                    <Orders />
+                    <Chart></Chart>
                 </Paper>
             </Grid>
         </div>

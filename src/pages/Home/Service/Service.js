@@ -30,7 +30,7 @@ const Service = ({ products }) => {
                         <Button variant="danger">Book Now</Button>
                     </Link>
 
-                    <Link><Button variant="warning" className="float-end">Details</Button></Link>
+                    <Button variant="warning" className="float-end">Details</Button>
                 </Card.Body>
 
             </Card>

@@ -28,6 +28,7 @@ const Booking = (props) => {
         const bookId = data.get('bookId');
         const productName = data.get('productName');
         const userName = data.get('userName');
+        const email = data.get('email');
         const phoneNo = data.get('phoneNo');
         const address = data.get('address');
         const postData = {
@@ -36,6 +37,7 @@ const Booking = (props) => {
             userName: userName,
             phoneNo: phoneNo,
             address: address,
+            email: email,
         }
 
         axios.post('http://localhost:5000/place_order', postData)

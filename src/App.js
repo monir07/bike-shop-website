@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from './pages/Home/Home/Home';
-import ContactUs from './pages/ContactUs/ContactUs';
 import Services from './pages/Home/Services/Services';
 import SignInSide from './pages/Login/Login/SignInSide';
 import NotFound from './pages/NotFound/NotFound';
@@ -31,9 +30,6 @@ function App() {
             <PrivateRoute path='/product/:bookId'>
               <Booking></Booking>
             </PrivateRoute>
-            <Route path='/contact-us'>
-              <ContactUs></ContactUs>
-            </Route>
             <PrivateRoute path='/dashboard'>
               <Dashboard></Dashboard>
             </PrivateRoute>

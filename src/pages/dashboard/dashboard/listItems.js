@@ -13,8 +13,6 @@ import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantity
 import LogoutIcon from '@mui/icons-material/Logout';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 import {
-  Switch,
-  Route,
   Link,
   useRouteMatch
 } from 'react-router-dom';
@@ -23,8 +21,21 @@ import useAuth from '../../../hooks/useAuth';
 
 
 const ListItems = () => {
-  const { logout } = useAuth();
-  let { path, url } = useRouteMatch();
+  // const [admin, setAdmin] = React.useState(false)
+  const { logout, admin } = useAuth();
+  // const email = user.email;
+  let { url } = useRouteMatch();
+
+  // React.useEffect(() => {
+  //   fetch(`http://localhost:5000/users/${email}`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       console.log(data);
+  //       if (data.role) {
+  //         setAdmin(true);
+  //       }
+  //     })
+  // }, [email])
 
   return (
     <div>
@@ -78,41 +89,46 @@ const ListItems = () => {
       </Link>
 
       {/* Admin User Menu List */}
-      <Link to={`${url}/manageOrders`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
-        <ListItem button>
-          <ListItemIcon>
-            <ShoppingCartIcon />
-          </ListItemIcon>
-          <ListItemText primary="Manage All Orders" />
-        </ListItem>
-      </Link>
+      {admin ?
+        <div>
+          <Link to={`${url}/manageOrders`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
+            <ListItem button>
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Manage All Orders" />
+            </ListItem>
+          </Link>
 
-      <Link to={`${url}/addProduct`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
-        <ListItem button>
-          <ListItemIcon>
-            <AddTaskIcon />
-          </ListItemIcon>
-          <ListItemText primary="Add A Product" />
-        </ListItem>
-      </Link>
+          <Link to={`${url}/addProduct`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
+            <ListItem button>
+              <ListItemIcon>
+                <AddTaskIcon />
+              </ListItemIcon>
+              <ListItemText primary="Add A Product" />
+            </ListItem>
+          </Link>
 
-      <Link to={`${url}/makeAdmin`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
-        <ListItem button>
-          <ListItemIcon>
-            <AdminPanelSettingsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Make Admin" />
-        </ListItem>
-      </Link>
+          <Link to={`${url}/makeAdmin`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
+            <ListItem button>
+              <ListItemIcon>
+                <AdminPanelSettingsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Make Admin" />
+            </ListItem>
+          </Link>
 
-      <Link to={`${url}/manageProducts`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
-        <ListItem button>
-          <ListItemIcon>
-            <ProductionQuantityLimitsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Manage Products" />
-        </ListItem>
-      </Link>
+          <Link to={`${url}/manageProducts`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
+            <ListItem button>
+              <ListItemIcon>
+                <ProductionQuantityLimitsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Manage Products" />
+            </ListItem>
+          </Link>
+        </div> :
+        null
+      }
 
       <ListItem button
         onClick={logout}

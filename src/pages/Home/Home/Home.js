@@ -9,11 +9,19 @@ import Footer from '../../shared/Footer/Footer';
 
 const Home = () => {
     const [product, setProduct] = useState([])
+    const [reviewItem, setReviewItem] = React.useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/products')
             .then(res => res.json())
             .then(data => setProduct(data.products));
     }, [])
+
+    useEffect(() => {
+        fetch('http://localhost:5000/reviews')
+            .then(res => res.json())
+            .then(data => setReviewItem(data.reviews));
+    }, [])
+
     return (
         <div id="home">
             <Header></Header>
@@ -24,14 +32,15 @@ const Home = () => {
                 <Row xs={1} md={3} className="g-4">
                     {
                         product.map((product, index) => (
-                            index > 2
-                                ? <Service key={product._id} products={product}></Service>
-                                : null
+                            index < 6 ?
+                                <Service key={product._id} products={product}></Service> :
+                                null
                         ))
                     }
                 </Row>
             </div>
-            <Review></Review>
+            <Review allReview={reviewItem}></Review>
+            <TeamMember></TeamMember>
             <Footer></Footer>
         </div>
     );

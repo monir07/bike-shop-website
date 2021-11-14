@@ -60,7 +60,7 @@ const useFirebase = () => {
             .then((result) => {
                 const user = result.user;
                 console.log("User Login: ", user);
-                // saveUser(user.email, user.displayName, 'PUT');
+                saveUser(user.email, user.displayName, 'PUT');
                 setAuthError('');
                 const destination = location?.state?.from || '/';
                 history.replace(destination);
@@ -86,11 +86,6 @@ const useFirebase = () => {
         return () => unsubscribed;
     }, [auth])
 
-    useEffect(() => {
-        fetch(`https://stark-caverns-04377.herokuapp.com/users/${user.email}`)
-            .then(res => res.json())
-            .then(data => setAdmin(data.admin))
-    }, [user.email])
 
     const logout = () => {
         setIsLoading(true);
@@ -104,7 +99,7 @@ const useFirebase = () => {
 
     const saveUser = (email, displayName, method) => {
         const user = { email, displayName };
-        fetch('https://stark-caverns-04377.herokuapp.com/users', {
+        fetch('http://localhost:5000/users', {
             method: method,
             headers: {
                 'content-type': 'application/json'
@@ -113,6 +108,17 @@ const useFirebase = () => {
         })
             .then()
     }
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${user.email}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.role) {
+                    setAdmin(true);
+                }
+            })
+    }, [user.email])
 
     return {
         user,

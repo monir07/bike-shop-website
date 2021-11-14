@@ -28,7 +28,7 @@ function App() {
             <PrivateRoute path='/products'>
               <Services></Services>
             </PrivateRoute>
-            <PrivateRoute path='/booking/:bookId'>
+            <PrivateRoute path='/product/:bookId'>
               <Booking></Booking>
             </PrivateRoute>
             <Route path='/contact-us'>

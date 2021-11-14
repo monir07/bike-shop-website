@@ -1,27 +1,18 @@
 import * as React from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
-
-import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import { CardActionArea } from '@mui/material';
-
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { Link, useHistory, useLocation } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Alert, CircularProgress } from '@mui/material';
-import GoogleIcon from '@mui/icons-material/Google';
 import useAuth from '../../hooks/useAuth';
 import Header from '../shared/Header/Header';
 
@@ -29,29 +20,60 @@ const Booking = (props) => {
     const { bookId } = useParams();
     const { user } = useAuth();
     const [bookedItem, setBookedItem] = React.useState([]);
+    const [isBooked, setIsBooked] = React.useState(false);
 
-    // react hook form 
-    // const { register, handleSubmit, reset } = useForm();
+    const handleBooking = event => {
+        // axios.post('https://fathomless-falls-34932.herokuapp.com/place_order', data)
+        //     .then(res => {
+        //         if (res.data.insertedId) {
+        //             alert('added successfully');
+        //             // reset();
+        //         }
+        //     })
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        const bookId = data.get('bookId');
+        const productName = data.get('productName');
+        const userName = data.get('userName');
+        const phoneNo = data.get('phoneNo');
+        const address = data.get('address');
+        const postData = {
+            bookingID: bookId,
+            productName: productName,
+            userName: userName,
+            phoneNo: phoneNo,
+            address: address,
+        }
+        console.log(postData);
 
-    const handleBooking = data => {
-        console.log(data)
-        axios.post('https://fathomless-falls-34932.herokuapp.com/place_order', data)
-            .then(res => {
-                if (res.data.insertedId) {
-                    alert('added successfully');
-                    // reset();
+        axios.post('http://localhost:5000/place_order', postData)
+            .then(response => {
+                if (response.data.insertedId) {
+                    setIsBooked(true);
+                    alert('Your Order is Booked');
                 }
             })
+            .catch(error => {
+                this.setState({ errorMessage: error.message });
+                console.error('There was an error!', error);
+            });
+
     };
 
-    const bookImage = 'https://i.ibb.co/bRmhx01/booking.jpg';
-
-    // useEffect(() => {
-    //     fetch(`https://fathomless-falls-34932.herokuapp.com/packages/${detailId}`)
+    // React.useEffect(() => {
+    //     fetch(`http://localhost:5000/products/${bookId}`)
     //         .then(res => res.json())
-    //         .then(data => setBooking(data))
+    //         .then(data => setBookedItem(data))
     // }, [])
-    console.log(bookedItem);
+
+    React.useEffect(() => {
+        const fetchProducts = async () => {
+            const response = await fetch(`http://localhost:5000/product/${bookId}`)
+            const data = await response.json()
+            setBookedItem(data)
+        }
+        fetchProducts()
+    }, [])
 
     const theme = createTheme();
     return (
@@ -86,15 +108,14 @@ const Booking = (props) => {
                                 component="img"
                                 alt="green iguana"
 
-                                image="https://i.ibb.co/VVFvZL1/img14.png"
+                                image={bookedItem.img}
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
-                                    Lizard
+                                    {bookedItem.name}
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                                    species, ranging across all continents except Antarctica
+                                    {bookedItem.description}
                                 </Typography>
                             </CardContent>
                         </Box>
@@ -118,9 +139,8 @@ const Booking = (props) => {
                             </Typography>
                             <Box component="form" Validate onSubmit={handleBooking} sx={{ mt: 1 }}>
                                 <TextField
-                                    disabled
-                                    margin="normal"
                                     fullWidth
+                                    margin="normal"
                                     label="Product id"
                                     value={bookId}
                                     name="bookId"
@@ -131,19 +151,18 @@ const Booking = (props) => {
                                     required
                                     fullWidth
                                     name="productName"
-                                    label="Product Name"
-                                    type="text"
-                                    autoComplete="current-password"
+                                    // label="Product Name"
+                                    value={bookedItem.name}
+
                                 />
                                 <TextField
                                     margin="normal"
-                                    readOnly="true"
                                     required
                                     fullWidth
                                     name="userName"
                                     label="User Name"
                                     value={user.displayName}
-                                    autoFocus
+
                                 />
                                 <TextField
                                     margin="normal"

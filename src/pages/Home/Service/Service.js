@@ -24,9 +24,12 @@ const Service = ({ products }) => {
                 </ListGroup>
                 <Card.Body>
                     <Link to={{
-                        pathname: "/booking/" + _id,
-                        userProps: { packageName: name, image: img, details: description },
-                    }}><Button variant="danger">Book Now</Button></Link>
+                        pathname: "/product/" + _id,
+                        props: { productName: name, image: img, details: description },
+                    }}>
+                        <Button variant="danger">Book Now</Button>
+                    </Link>
+
                     <Link><Button variant="warning" className="float-end">Details</Button></Link>
                 </Card.Body>
 

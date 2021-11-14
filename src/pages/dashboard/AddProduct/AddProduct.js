@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const AddProduct = () => {
     const [isAdded, setIsAdded] = React.useState(false);
-
+    console.log(isAdded);
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -24,7 +24,7 @@ const AddProduct = () => {
             description: shortDetails
         };
         console.log(postData);
-        axios.post('http://localhost:5000/product', postData)
+        axios.post('https://desolate-badlands-81980.herokuapp.com/product', postData)
             .then(response => {
                 if (response.data.insertedId) {
                     setIsAdded(true);

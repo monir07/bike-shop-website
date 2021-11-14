@@ -6,8 +6,12 @@
 <b>Available Feature:</b>
 <ul>
     <li> React Frame Works</li>
+    <li> Beautiful Dashboard</li>
+    <li> Client & Admin Restriction on Dashboard access</li>
+    <li> Easy Maintain Product, Order and User Management on Dashboard</li>
     <li> Node, Express use for backend server.</li>
-    <li> React Bootstrap</li>
+    <li> Use React Bootstrap</li>
+    <li> Use React Material UI</li>
     <li> React Router dom for navigation</li>
     <li> Use Private Router</li>
     <li> Responsive Ready for Small Device and Large Device</li>

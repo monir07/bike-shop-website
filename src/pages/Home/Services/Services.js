@@ -10,7 +10,7 @@ const Services = () => {
     const [product, setProduct] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://desolate-badlands-81980.herokuapp.com/products')
             .then(res => res.json())
             .then(data => {
                 setProduct(data.products);

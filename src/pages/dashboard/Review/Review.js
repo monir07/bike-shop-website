@@ -8,6 +8,7 @@ import useAuth from '../../../hooks/useAuth';
 const Review = () => {
     const [isAdded, setIsAdded] = React.useState(false);
     const { user } = useAuth();
+    console.log(isAdded);
     const reviewPoint = [
         {
             value: 0,
@@ -56,7 +57,7 @@ const Review = () => {
             description: reviewDetails
         };
         console.log(postData);
-        axios.post('http://localhost:5000/review', postData)
+        axios.post('https://desolate-badlands-81980.herokuapp.com/review', postData)
             .then(response => {
                 if (response.data.insertedId) {
                     setIsAdded(true);

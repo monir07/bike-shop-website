@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -15,15 +14,15 @@ const MyOrder = () => {
     console.log(email);
 
     React.useEffect(() => {
-        fetch(`http://localhost:5000/order/${email}`)
+        fetch(`https://desolate-badlands-81980.herokuapp.com/order/${email}`)
             .then(res => res.json())
             .then(data => setMyOrder(data));
-    }, [])
+    }, [email])
 
     const handleDeleteOrder = (id) => {
         const proceed = window.confirm('Are you sure, you want to delete?');
         if (proceed) {
-            const url = `http://localhost:5000/order/${id}`;
+            const url = `https://desolate-badlands-81980.herokuapp.com/order/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

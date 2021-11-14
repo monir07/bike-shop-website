@@ -11,7 +11,7 @@ const ManageAllOrder = () => {
     const [allOrder, setAllOrder] = React.useState([]);
 
     React.useEffect(() => {
-        fetch('http://localhost:5000/all-orders')
+        fetch('https://desolate-badlands-81980.herokuapp.com/all-orders')
             .then(res => res.json())
             .then(data => setAllOrder(data.orders));
     }, [])
@@ -20,7 +20,7 @@ const ManageAllOrder = () => {
     const handleDeleteOrder = (id) => {
         const proceed = window.confirm('Are you sure, you want to delete?');
         if (proceed) {
-            const url = `http://localhost:5000/order/${id}`;
+            const url = `https://desolate-badlands-81980.herokuapp.com/order/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

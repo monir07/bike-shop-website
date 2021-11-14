@@ -27,7 +27,7 @@ const ListItems = () => {
   let { url } = useRouteMatch();
 
   // React.useEffect(() => {
-  //   fetch(`http://localhost:5000/users/${email}`)
+  //   fetch(`https://desolate-badlands-81980.herokuapp.com/users/${email}`)
   //     .then(res => res.json())
   //     .then(data => {
   //       console.log(data);

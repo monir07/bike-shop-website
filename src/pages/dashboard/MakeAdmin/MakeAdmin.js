@@ -10,7 +10,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 const MakeAdmin = () => {
     const [allUser, setAllUser] = React.useState([])
     React.useEffect(() => {
-        fetch('http://localhost:5000/users')
+        fetch('https://desolate-badlands-81980.herokuapp.com/users')
             .then(res => res.json())
             .then(data => setAllUser(data.users));
     }, [])
@@ -18,7 +18,7 @@ const MakeAdmin = () => {
     const handleMakeAdmin = (id) => {
         const proceed = window.confirm('Are you sure, Make Admin?');
         if (proceed) {
-            const url = `http://localhost:5000/users/admin/${id}`;
+            const url = `https://desolate-badlands-81980.herokuapp.com/users/admin/${id}`;
             fetch(url, {
                 method: 'PUT'
             })

@@ -21,7 +21,7 @@ const Booking = (props) => {
     const { user } = useAuth();
     const [bookedItem, setBookedItem] = React.useState([]);
     const [isBooked, setIsBooked] = React.useState(false);
-
+    console.log(isBooked);
     const handleBooking = event => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -40,7 +40,7 @@ const Booking = (props) => {
             email: email,
         }
 
-        axios.post('http://localhost:5000/place_order', postData)
+        axios.post('https://desolate-badlands-81980.herokuapp.com/place_order', postData)
             .then(response => {
                 if (response.data.insertedId) {
                     setIsBooked(true);
@@ -56,12 +56,12 @@ const Booking = (props) => {
 
     React.useEffect(() => {
         const fetchProducts = async () => {
-            const response = await fetch(`http://localhost:5000/product/${bookId}`)
+            const response = await fetch(`https://desolate-badlands-81980.herokuapp.com/product/${bookId}`)
             const data = await response.json()
             setBookedItem(data)
         }
         fetchProducts()
-    }, [])
+    }, [bookId])
 
     const theme = createTheme();
     return (

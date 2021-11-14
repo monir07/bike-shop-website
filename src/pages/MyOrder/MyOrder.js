@@ -9,7 +9,7 @@ const MyOrder = () => {
         fetch(`https://fathomless-falls-34932.herokuapp.com/order/${user.email}`)
             .then(res => res.json())
             .then(data => setAllOrder(data));
-    }, [])
+    }, [user.email])
 
     const handleDeleteOrder = id => {
         const proceed = window.confirm('Are you sure, you want to delete?');

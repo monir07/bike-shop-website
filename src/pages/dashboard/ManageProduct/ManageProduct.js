@@ -9,7 +9,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 const ManageProduct = () => {
     const [allProduct, setAllProduct] = React.useState([])
     React.useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://desolate-badlands-81980.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setAllProduct(data.products));
     }, [])
@@ -17,7 +17,7 @@ const ManageProduct = () => {
     const handleDeleteProduct = (id) => {
         const proceed = window.confirm('Are you sure, you want to delete?');
         if (proceed) {
-            const url = `http://localhost:5000/product/${id}`;
+            const url = `https://desolate-badlands-81980.herokuapp.com/product/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

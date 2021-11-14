@@ -2,6 +2,7 @@ import React from 'react';
 
 const ReviewItem = ({ review }) => {
     const { img, name, point, description } = review;
+
     return (
         <div className='item'>
             <div className="card align-items-center border-0">

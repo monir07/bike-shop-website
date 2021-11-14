@@ -9,18 +9,30 @@ import Footer from '../../shared/Footer/Footer';
 
 const Home = () => {
     const [product, setProduct] = useState([])
-    const [reviewItem, setReviewItem] = React.useState([]);
+    const [reviewItem, setReviewItem] = useState([]);
+
     useEffect(() => {
         fetch('https://desolate-badlands-81980.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setProduct(data.products));
-    }, [])
+    }, []);
 
+    console.log(product);
     useEffect(() => {
         fetch('https://desolate-badlands-81980.herokuapp.com/reviews')
             .then(res => res.json())
             .then(data => setReviewItem(data.reviews));
-    }, [])
+    }, []);
+    console.log(reviewItem);
+
+    // useEffect(() => {
+    //     async function fetchMyAPI() {
+    //         let response = await fetch('https://desolate-badlands-81980.herokuapp.com/reviews')
+    //         response = await response.json()
+    //         setReviewItem(response.reviews)
+    //     }
+    //     fetchMyAPI()
+    // }, [])
 
     return (
         <div id="home">

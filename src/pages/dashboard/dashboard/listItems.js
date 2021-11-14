@@ -21,21 +21,8 @@ import useAuth from '../../../hooks/useAuth';
 
 
 const ListItems = () => {
-  // const [admin, setAdmin] = React.useState(false)
   const { logout, admin } = useAuth();
-  // const email = user.email;
   let { url } = useRouteMatch();
-
-  // React.useEffect(() => {
-  //   fetch(`https://desolate-badlands-81980.herokuapp.com/users/${email}`)
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       console.log(data);
-  //       if (data.role) {
-  //         setAdmin(true);
-  //       }
-  //     })
-  // }, [email])
 
   return (
     <div>
@@ -59,35 +46,6 @@ const ListItems = () => {
         </ListItem>
       </Link>
 
-      {/* Normal User menu list */}
-      <Link to={`${url}/pay`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
-        <ListItem button>
-          <ListItemIcon>
-            <MonetizationOnIcon />
-          </ListItemIcon>
-          <ListItemText primary="Pay" />
-        </ListItem>
-      </Link>
-
-
-      <Link to={`${url}/myOrders`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
-        <ListItem button>
-          <ListItemIcon>
-            <ViewListIcon />
-          </ListItemIcon>
-          <ListItemText primary="My Orders" />
-        </ListItem>
-      </Link>
-
-      <Link to={`${url}/review`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
-        <ListItem button>
-          <ListItemIcon>
-            <ReviewsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Review" />
-        </ListItem>
-      </Link>
-
       {/* Admin User Menu List */}
       {admin ?
         <div>
@@ -105,16 +63,7 @@ const ListItems = () => {
               <ListItemIcon>
                 <AddTaskIcon />
               </ListItemIcon>
-              <ListItemText primary="Add A Product" />
-            </ListItem>
-          </Link>
-
-          <Link to={`${url}/makeAdmin`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
-            <ListItem button>
-              <ListItemIcon>
-                <AdminPanelSettingsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Make Admin" />
+              <ListItemText primary="Add Product" />
             </ListItem>
           </Link>
 
@@ -126,8 +75,45 @@ const ListItems = () => {
               <ListItemText primary="Manage Products" />
             </ListItem>
           </Link>
+
+          <Link to={`${url}/makeAdmin`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
+            <ListItem button>
+              <ListItemIcon>
+                <AdminPanelSettingsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Make Admin" />
+            </ListItem>
+          </Link>
         </div> :
-        null
+        <div>
+          {/* Normal User menu list */}
+          <Link to={`${url}/pay`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
+            <ListItem button>
+              <ListItemIcon>
+                <MonetizationOnIcon />
+              </ListItemIcon>
+              <ListItemText primary="Pay" />
+            </ListItem>
+          </Link>
+
+          <Link to={`${url}/myOrders`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
+            <ListItem button>
+              <ListItemIcon>
+                <ViewListIcon />
+              </ListItemIcon>
+              <ListItemText primary="My Orders" />
+            </ListItem>
+          </Link>
+
+          <Link to={`${url}/review`} style={{ textDecoration: 'none', color: '#3a3a3a' }}>
+            <ListItem button>
+              <ListItemIcon>
+                <ReviewsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Review" />
+            </ListItem>
+          </Link>
+        </div>
       }
 
       <ListItem button

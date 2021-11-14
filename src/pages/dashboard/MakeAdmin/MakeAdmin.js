@@ -8,12 +8,13 @@ import TableRow from '@mui/material/TableRow';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const MakeAdmin = () => {
-    const [allUser, setAllUser] = React.useState([])
+    const [allUser, setAllUser] = React.useState([]);
+    const [status, setStatus] = React.useState(0);
     React.useEffect(() => {
         fetch('https://desolate-badlands-81980.herokuapp.com/users')
             .then(res => res.json())
             .then(data => setAllUser(data.users));
-    }, [])
+    }, [status])
 
     const handleMakeAdmin = (id) => {
         const proceed = window.confirm('Are you sure, Make Admin?');
@@ -24,10 +25,10 @@ const MakeAdmin = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    alert('Make Admin successfully');
-                    // if (data.deletedCount > 0) {
-                    //     alert('Make Admin successfully');
-                    // }
+                    if (data.modifiedCount > 0) {
+                        alert('Make Admin Successful');
+                        setStatus(oldKey => oldKey + 1);
+                    }
                 });
         }
     }
@@ -56,7 +57,6 @@ const MakeAdmin = () => {
                                             <CheckCircleIcon /> :
                                             <Button variant="contained" onClick={() => handleMakeAdmin(row._id)}>Make Admin</Button>
                                     }
-                                    {/* <Button variant="contained" onClick={() => handleMakeAdmin(row._id)}>Make Admin</Button> */}
                                 </TableCell>
                             </TableRow>
                         ))}

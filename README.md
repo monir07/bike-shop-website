@@ -1,7 +1,9 @@
-<b>Live Site Link:</b> https://tourism-site-12e6c.web.app
+<b>Live Site Link:</b> https://bike-point-62385.web.app
 </br> 
 <b>Deploy:</b> Client Site Deploy in Firebase. and Backend from Heroku.
 <b>Database:</b> MongoDB.
+<b>Admin User:</b> mira@ksy.com
+<b>Admin Password:</b> Mira123
 
 <b>Available Feature:</b>
 <ul>

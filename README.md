@@ -2,8 +2,9 @@
 </br> 
 <b>Deploy:</b> Client Site Deploy in Firebase. and Backend from Heroku.
 <b>Database:</b> MongoDB.
-<b>Admin User:</b> mira@ksy.com
-<b>Admin Password:</b> Mira123
+</br>
+<b>Admin User:</b> admin@admin.com
+<b>Admin Password:</b> 123456
 
 <b>Available Feature:</b>
 <ul>
